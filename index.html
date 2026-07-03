@@ -2,89 +2,454 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>APEC College Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEC Student & Staff Portal - Login</title>
+    <style>
+        /* College Brand Theme Colors */
+        :root {
+            --brand-maroon: #b3191f;
+            --brand-hover: #801014;
+            --bg-gradient-start: #fdfbfb;
+            --bg-gradient-end: #ebedee;
+            --text-dark: #333333;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #e9eef5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
 
-    .login-box {
-      background: #fff;
-      padding: 25px;
-      width: 340px;
-      text-align: center;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.15);
-    }
+        .login-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(179, 25, 31, 0.15);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            border-top: 5px solid var(--brand-maroon);
+            text-align: center;
+        }
 
-    .login-box img {
-      width: 90px;
-      margin-bottom: 10px;
-    }
+        .logo-container {
+            margin-bottom: 1rem;
+        }
 
-    .login-box h2 {
-      margin: 10px 0;
-      color: #1a237e;
-    }
+        /* College Logo Layout */
+        .college-logo {
+            width: 130px;
+            height: auto;
+            object-fit: contain;
+        }
 
-    .login-box input {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+        h2 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.35rem;
+            color: var(--brand-maroon);
+            font-weight: 700;
+            line-height: 1.4;
+        }
 
-    .login-box button {
-      width: 95%;
-      padding: 10px;
-      background: #1a237e;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+        .location-tag {
+            margin: 0 0 1.5rem 0;
+            font-size: 0.85rem;
+            color: #666666;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
 
-    .login-box button:hover {
-      background: #0d1440;
-    }
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
 
-    .tagline {
-      font-size: 13px;
-      color: gray;
-      margin-bottom: 10px;
-    }
-  </style>
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #444444;
+        }
+
+        /* Relative container positioning to house the hide/show button icon */
+        .password-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--brand-maroon);
+            box-shadow: 0 0 0 3px rgba(179, 25, 31, 0.15);
+        }
+
+        /* Extra right side inner padding to avoid text overlapping the visibility link button */
+        #password {
+            padding-right: 3.5rem;
+        }
+
+        /* Interactive visibility icon styling */
+        .toggle-password {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0;
+        }
+
+        .toggle-password:hover {
+            color: var(--brand-maroon);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .form-options a {
+            color: var(--brand-maroon);
+            text-decoration: none;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--brand-maroon);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--brand-hover);
+        }
+
+        .motto {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--brand-maroon);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="login-box">
+    <div class="login-card">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <!-- Space encoded as %20 to match standard URL structure rules -->
+            <img class="college-logo" src="APEC IMAGE.jpeg" alt="APEC IMAGE.jpeg">
+        </div>
 
-    <!-- Upload your APEC logo as logo.png in GitHub repo -->
-    <img src="logo.png" alt="APEC College Logo">
- 
+        <h2>Adhiparasakthi Engineering College</h2>
+        <p class="location-tag">Melmaruvathur</p>
 
-    <h2>APEC College Login</h2>
-    <p class="tagline">Welcome to Academic Portal</p>
+        <!-- Login Form Container -->
+        <form action="/login-portal" method="POST">
+           
+            <!-- Username Input Area -->
+            <div class="form-group">
+                <label for="username">Username / Register Number</label>
+                <input type="text" id="username" name="username" autocomplete="username" placeholder="Enter your username" required>
+            </div>
 
-    <form action="https://formspree.io/f/xdarpbvo" method="POST">
-      <input type="text" name="username" placeholder="Enter Username" required>
-      <input type="password" name="password" placeholder="Enter Password" required>
-      <button type="submit">Login</button>
-    </form>
+            <!-- Password Input Area -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Enter your password" required>
+                    <button type="button" class="toggle-password" id="togglePassword">Show</button>
+                </div>
+            </div>
 
-  </div>
+            <!-- Form Context Actions -->
+            <div class="form-options">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Element -->
+            <button type="submit" class="submit-btn">Login to Portal</button>
+        </form>
+
+        <!-- College Motto Footer Element -->
+        <div class="motto">Study &bull; Spirituality &bull; Service</div>
+    </div>
+
+    <!-- Client-side script logic for field visibility toggle functions -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+
+        toggleButton.addEventListener('click', function () {
+            // Toggle types between standard string mask or text stream patterns
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+           
+            // Switch button descriptive text labels
+            this.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEC Student & Staff Portal - Login</title>
+    <style>
+        /* College Brand Theme Colors */
+        :root {
+            --brand-maroon: #b3191f;
+            --brand-hover: #801014;
+            --bg-gradient-start: #fdfbfb;
+            --bg-gradient-end: #ebedee;
+            --text-dark: #333333;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(179, 25, 31, 0.15);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            border-top: 5px solid var(--brand-maroon);
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 1rem;
+        }
+
+        /* College Logo Layout */
+        .college-logo {
+            width: 130px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        h2 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.35rem;
+            color: var(--brand-maroon);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .location-tag {
+            margin: 0 0 1.5rem 0;
+            font-size: 0.85rem;
+            color: #666666;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #444444;
+        }
+
+        /* Relative container positioning to house the hide/show button icon */
+        .password-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--brand-maroon);
+            box-shadow: 0 0 0 3px rgba(179, 25, 31, 0.15);
+        }
+
+        /* Extra right side inner padding to avoid text overlapping the visibility link button */
+        #password {
+            padding-right: 3.5rem;
+        }
+
+        /* Interactive visibility icon styling */
+        .toggle-password {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0;
+        }
+
+        .toggle-password:hover {
+            color: var(--brand-maroon);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .form-options a {
+            color: var(--brand-maroon);
+            text-decoration: none;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--brand-maroon);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--brand-hover);
+        }
+
+        .motto {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--brand-maroon);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <!-- Space encoded as %20 to match standard URL structure rules -->
+            <img class="college-logo" src="APEC IMAGE.jpeg" alt="APEC IMAGE.jpeg">
+        </div>
+
+        <h2>Adhiparasakthi Engineering College</h2>
+        <p class="location-tag">Melmaruvathur</p>
+
+        <!-- Login Form Container -->
+        <form action="/login-portal" method="POST">
+           
+            <!-- Username Input Area -->
+            <div class="form-group">
+                <label for="username">Username / Register Number</label>
+                <input type="text" id="username" name="username" autocomplete="username" placeholder="Enter your username" required>
+            </div>
+
+            <!-- Password Input Area -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Enter your password" required>
+                    <button type="button" class="toggle-password" id="togglePassword">Show</button>
+                </div>
+            </div>
+
+            <!-- Form Context Actions -->
+            <div class="form-options">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Element -->
+            <button type="submit" class="submit-btn">Login to Portal</button>
+        </form>
+
+        <!-- College Motto Footer Element -->
+        <div class="motto">Study &bull; Spirituality &bull; Service</div>
+    </div>
+
+    <!-- Client-side script logic for field visibility toggle functions -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+
+        toggleButton.addEventListener('click', function () {
+            // Toggle types between standard string mask or text stream patterns
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+           
+            // Switch button descriptive text labels
+            this.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
 
 </body>
 </html>
+
